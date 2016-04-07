@@ -30,7 +30,7 @@ class Login extends CI_Controller
         // $this->load->view('templates/footer');
 
     }
-
+    //登录判断
     public function check()
     {
         $username = $_POST['username'];
@@ -38,28 +38,41 @@ class Login extends CI_Controller
         if ($username === '' || $psw === '' ) 
         {
             //加载登录页面
-            $this->load_login();
-            echo "数据为空";
+            
+            $data['mess'] = "账号或密码为空";
+            $this->load->view('login',$data);
+
             return false;
 
         }else if (strlen($username)>16 || strlen($psw)>16) 
         {
 
-            $this->load_login();
-            echo '用户名或密码太长';
+            
+            $data['mess'] = "用户名和密码太长";
+            $this->load->view('login',$data);
+            return false;
 
         }else{
 
             $row = $this->Admin->get_admin($username);
-            if ($row[0]['admin_password']==md5($psw)) 
-            {
-                $this->session->set_userdata(array('user'=>$username));
-                redirect('/Blog/Get_article');
-
+            if (count($row)!=0) {
+                if ($row[0]['admin_password']==md5($psw)) 
+                {
+                    $this->session->set_userdata(array('user'=>$username,'permission'=>$row[0]['permission']));
+                    redirect('Administration/adminIndex');
+    
+                }else{
+                    
+                    $data['mess'] =  "账号和密码不符合";
+                    $this->load->view('login',$data);
+                    return false;
+                }
             }else{
-                $this->load_login();
-                echo "账号和密码不符合";
+                $data['mess'] =  "未找到当前用户";
+                $this->load->view('login',$data);
+                return false ;
             }
+            
         }
     }
 }

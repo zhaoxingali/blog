@@ -112,8 +112,6 @@ class Blog extends CI_Controller {
 
         $data['all_keyword_article'] = $this->Article->get_limit_articles($limit);
 
-        $this->loadview('classify',$data);                          
+        $this->loadview('article/classify',$data);                          
     }
-
-    
 }

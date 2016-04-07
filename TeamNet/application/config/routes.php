@@ -52,6 +52,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['Blog/(:get_one_article)'] = 'Blog/get_one_article/$1'; 
 $router['Blog'] = 'Blog';
 $route['default_controller'] = 'Login/load_login';
+// $route['default_controller'] = 'Blog/Get_article';
 $route['Blog/article'] = 'Blog/Get_article';
 
 

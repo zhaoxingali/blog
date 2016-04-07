@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
+    
     <style>
     header{
         height:50px;
@@ -46,6 +47,7 @@
         color:#B11C3F;
     }
     </style>
+  
 </head>
 <body>
 <header>
@@ -60,7 +62,7 @@
             }
             //去重
             $nav_ul = array_unique($nav_ul);
-
+            echo "<li><a href='".site_url()."/Blog/Get_article'>首页</a></li>";
             for ($i=0; $i < count($nav_ul); $i++) { 
                 echo "<li><a href='".site_url()."/Blog/get_keyword_arricle/".$nav_ul[$i]."'>".$nav_ul[$i]."</a></li>";
             }
